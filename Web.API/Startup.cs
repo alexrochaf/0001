@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Web.API.Servicos.Interfaces;
+using Web.API.Servicos;
 
 namespace Web.API
 {
@@ -46,6 +48,8 @@ namespace Web.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Teste API", Version = "v1" });
             });
+
+            services.AddScoped<IJsonPlaceHolderServico, JsonPlaceHolderServico>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

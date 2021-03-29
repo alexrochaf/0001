@@ -1,16 +1,23 @@
-﻿using Web.API.Models;
-using Web.API.Models.Db;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using Web.API.Models.Db;
+using Web.API.Servicos.Interfaces;
 
 namespace Web.API.Controllers
 {
-    [Route("api/clientes")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ClienteController : ControllerBase
     {
         private WebContext _context = null;
+        private readonly IJsonPlaceHolderServico _servico;
+
+        public ClienteController(IJsonPlaceHolderServico servico)
+        {
+            _servico = servico;
+        }
 
         [HttpGet]
         public ActionResult Get()
@@ -27,6 +34,13 @@ namespace Web.API.Controllers
             {
                 return NotFound(ex.Message);
             }
+        }
+
+        [HttpGet]
+        [Route("ObterDados")]
+        public async Task<Cliente> ObeterDados(string email)
+        {
+            return await _servico.ObterDadosPorEmail(email);
         }
     }
 }
