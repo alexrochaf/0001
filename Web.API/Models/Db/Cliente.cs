@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web.API.Models.Db
 {
-    [Table("Cliente")]
+    [Table("Clientes")]
     public partial class Cliente
     {
         [Key]
