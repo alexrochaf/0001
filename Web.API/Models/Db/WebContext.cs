@@ -28,7 +28,11 @@ namespace Web.API.Models.Db
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Cliente>().ToTable("Cliente");
-
+            modelBuilder.Entity<Cliente>().OwnsOne(x => x.Company);
+            modelBuilder.Entity<Cliente>().OwnsOne(x => x.Address, ad =>
+            {
+                ad.OwnsOne(a => a.Geo);
+            });
         }
     }
 }
